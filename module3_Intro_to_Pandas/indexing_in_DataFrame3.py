@@ -11,3 +11,11 @@ data = {
 df = pd.DataFrame(data)
 print("Original DataFrame:")
 print(df)
+
+# Accessing a single row by index
+print("\nAccessing the row at index 1:")
+print(df.loc[1])
+
+# Accessing multiple rows by index
+print("\nAccessing rows at index 0 and 2:")
+print(df.loc[[0, 2]])

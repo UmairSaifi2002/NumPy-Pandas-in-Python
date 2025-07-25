@@ -33,7 +33,7 @@ print("\nDataFrame after adding a new column:")
 print(df)
 
 
-# Removing the row fromt he DataFrame
+# Removing the row from the DataFrame
 df = df.drop(0)  # Dropping the first row
 print("\nDataFrame after removing the first row:")
 print(df)
