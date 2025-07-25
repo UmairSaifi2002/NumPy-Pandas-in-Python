@@ -18,5 +18,7 @@ print(f'\nThe Missing values in the DataFrame : \n{df.isna()}')
 # if we donot want the missing values so we can frop it 
 print(f'\nDataFrame after dropping the missing values: \n{df.dropna()}')
 
-# 
+# if we want to fill the missing values with some value
 print(f'\nDataFrame after filling the missing values with 0: \n{df.fillna({"age": 19, "course": "Unknown"} )}')
+
+
