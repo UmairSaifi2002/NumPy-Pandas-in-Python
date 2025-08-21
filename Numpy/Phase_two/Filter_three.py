@@ -34,23 +34,6 @@ print(f'Condition array with operations -np.where(numbers > 5, numbers * 4, numb
 
 
 
-# ------------------------------------------------------------------------
-# array contcatintion in numpy
-arr1 = np.array([1,2,3])
-arr2 = np.array([4,5,6])
-
-combined = np.concatenate((arr1, arr2))
-print(combined)
-
-# ------------------------------------------------------------------------
-# array compatibility
-arr3 = np.array([[1, 2], [3, 4]])
-arr4 = np.array([[5, 6], [7, 8]])
-print(f'Array compatibility -arr3.shape == arr4.shape- : {arr3.shape == arr4.shape}')
-
-
-
-
 
 
 
