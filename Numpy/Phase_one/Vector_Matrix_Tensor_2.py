@@ -2,7 +2,7 @@ import numpy as np
 
 # Now we will see about the vector, matrix, tensor
 
-# vector is a one-dimension array
+# vector is a one-dimensional array
 vector = np.array([1,2,3,4,5])
 print(f'Vector or One-Dimensional array : \n{vector}')
 
