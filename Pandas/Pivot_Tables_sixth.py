@@ -35,3 +35,5 @@ print(f'\nPivot Table 2: \n{pivotTable2}')
 # but Pivot Tables is used for aggregation purpose
 crossTab = pd.crosstab(dataFrame['Region'], dataFrame['Product'])
 print(f'\nCross Tab: \n{crossTab}')
+
+

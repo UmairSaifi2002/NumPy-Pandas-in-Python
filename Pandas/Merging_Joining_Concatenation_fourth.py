@@ -22,14 +22,14 @@ print(f"\nSalary DataFrame: \n{df2}")
 
 # Merging DataFrames
 # Merging on a single column
-print(pd.merge(df1, df2, on='EmployeeID', how='outer'))
+print(f'\nThe Merging of two DataFrame \n{pd.merge(df1, df2, on='EmployeeID', how='outer')}')
 
 # -------------------------------------------------------------------------------------------------------------
 # Concatenation of DataFrames
 
 print(f'\n Concatinating Two DataFrames : \n{pd.concat([df1, df2])}') # it is based on columns
-print(f'\n Concatinating Two DataFrames : \n{pd.concat([df1, df2], axis=1)}') # it is based on rows
-print(f'\n Concatinating Two DataFrames : \n{pd.concat([df1, df2], axis=1)}') # it is based on rows
+print(f'\n Concatinating Two DataFrames : \n{pd.concat([df1, df2], axis=0)}') # it is based on rows
+print(f'\n Concatinating Two DataFrames : \n{pd.concat([df1, df2], axis=1)}') # it is based on columns
 
 # -------------------------------------------------------------------------------------------------------------
 # Joining of DataFrames
