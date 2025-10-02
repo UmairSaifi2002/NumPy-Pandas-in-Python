@@ -1,5 +1,5 @@
 # Now i will learn about DataFrames in pandas
-# A DataFrame is a two-dimensional, size-mutable, and potentially heterogeneous tabular data structure with labeled axes (rows and columns).
+# A DataFrame is a two-dimensional, size-mutable, and potentially heterogeneous tabular data structure with labeled axis (rows and columns).
 # It is similar to a spreadsheet or SQL table, or a dictionary of Series objects.
 
 import numpy as np
@@ -45,13 +45,13 @@ print(f"\nDataFrame from a NumPy array: \n{df3}")
 # ------------------------------------------------------------------------------
 # indexing and selecting data in DataFrame
 print(f"\nSelecting the 'Name' column: \n{df1['Name']}")
-print(f"\nSelecting the 'Name' column: \n{df1[['Name', 'Salary']]}")
+print(f"\nSelecting the 'Name' & 'Salary' columns: \n{df1[['Name', 'Salary']]}")
 
 # ------------------------------------------------------------------------------
 # Creating a new column
 df1['Experience'] = [2, 5, 1, 7]
 df1['Designation'] = ['Engineer', 'Manager', 'Intern', 'Director']
-print(f"\nDataFrame after adding a new column: \n{df1}")
+print(f"\nDataFrame after adding a new column's: \n{df1}")
 
 # ------------------------------------------------------------------------------
 # Dropping a column

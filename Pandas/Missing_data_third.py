@@ -24,7 +24,7 @@ print(f'\nChecking for non-missing values : \n{df.isna().any()}')
 # Handling missing data
 # mainly here i will learn about how to Remove missing data in a DataFrame
 
-# .dropna() function is used to remove the rows with missin data
+# .dropna() function is used to remove the rows with missing data
 # by default it removes the rows with any missing values
 print(f'\nDataFrame after dropping rows with any missing values: \n{df.dropna()}')
 

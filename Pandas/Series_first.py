@@ -1,5 +1,5 @@
 # Now i will tell you about the Series in pandas
-# Series is a one-dimensional array-like object that can hold various data types, including integers, floats, strings, and Python objects. \
+# Series is an one-dimensional array-like object that can hold various data types, including integers, floats, strings, and Python objects. 
 # It is similar to a column in a DataFrame or a one-dimensional array in NumPy.
 # Each element in a Series is associated with an index, which allows for easy access and manipulation of data. 
 # If no index is provided, pandas will create a default integer index starting from 0.
