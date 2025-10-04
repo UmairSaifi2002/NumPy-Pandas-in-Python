@@ -21,7 +21,7 @@ print(f"Original DataFrame: \n{df}")
 print(f'\nSales sum for each Category : \n{df.groupby('Category')['Sales'].sum()}')
 
 
-# groupping by mulriple columns
+# groupping by multiple columns
 print(f'\nSales sum for each Category and Store : \n{df.groupby(['Category', 'Store'])['Sales'].sum()}')
 
 # ------------------------------------------------------------------------------

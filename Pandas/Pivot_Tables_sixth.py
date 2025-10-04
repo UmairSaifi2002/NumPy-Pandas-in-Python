@@ -21,7 +21,7 @@ print(f'Original DataFrame: \n{dataFrame}')
 # using Groupby for the data
 # print(f'GroupBy Result: \n{dataFrame.groupby(["Product", "Region"]).agg({"Sales": "sum", "Units": "sum"})}')
 
-# making a pivort table
+# making a pivot table
 pivotTable = pd.pivot_table(dataFrame, values='Sales', index='Region', columns='Product', aggfunc='sum')
 print(f'\nPivot Table: \n{pivotTable}')
 
