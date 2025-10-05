@@ -2,122 +2,97 @@ import pandas as pd
 import numpy as np
 import re
 from dateutil.relativedelta import relativedelta 
+from datetime import datetime
 
-data = pd.read_csv(r'anime.csv')
+data = pd.read_csv(r'C:\\Umair\\Numpy Pandas\\NumPy-Pandas-in-Python\\anime.csv')
 
 # print(data)
-
-# print(f'Top 5 rows of data : \n{data.head()}')
-
-# make a new column for episode count
-# data['Episode_count'] = data['Episodes'].apply(lambda x: 0 if x == 'Unknown' else int(x))
-
+# print(data.loc[1])
 # print(data.loc[1]['Title'])
 
-def episode_count(x):
+# ------------------------------------------------------------------------------------------
+# Extracting Episode from the Title Column
+
+def extract_episode(title):
     check = False
     data = ''
-    for i in x:
+    for i in title:
         if i == ')':
             break
         if i == '(':
             check = True
         if check:
-            data += i
-    if data == '':
-        return 0
-    # return int(data[1:3])
-    return data[1:-1]
+            data = data + i
+    data = data[1:]
+    return data
 
-# ----------------------------------------------------------------------
-# manually entering the episode count to the data frame
-# print(episode_count(data.loc[1]['Title']))
-# print(len(data))
 
-# episode_count_list = []
-
-# for i in range(len(data)):
-#     # print(f'Index : {i} | Title : {data.loc[i]['Title']} | Episode Count : {episode_count(data.loc[i]['Title'])} ')
-#     episode_count_list.append(episode_count(data.loc[i]['Title']))
-
-# data['Episode_count'] = episode_count_list
+data['Episode'] = data['Title'].apply(extract_episode)
 
 # print(data)
 
-# ----------------------------------------------------------------------
-# using apply function to enter the episode count to the data frame
-data['Episode_count'] = data['Title'].apply(episode_count)
+# --------------------------------------------------------------------------------------------
+# Convert the Episode column to int
+data['Episode'] = data['Episode'].str.replace('eps', ' ')
+data['Episode'] = data['Episode'].astype(int)
 # print(data)
 
-data['Episode_count'] = data['Episode_count'].str.replace(' ep','')
-data['Episode_count'] = data['Episode_count'].astype(int)
-# print(data)
 
-#-------------------------------------------------------------------------------
-# Extracting the time stamp from the Episodes 
-def extract_episode_time_stamp(x):
+# --------------------------------------------------------------------------------------------
+# Make a new Column for time stamp
+# print(data.loc[1]['Title'])
+
+def extraction_time(txt):
     check = False
     data = ''
-    for i in x:
-        if i == ',':
-            break
-        if i == ')':
-            check = True
-        if check:
-            data += i
-    data = data.replace(')', '')
-    data = data[0:19]
-    return data
-# print(data.loc[0]['Title'])
-# print(extract_episode_time_stamp(data.loc[1]['Title']))
-        
-data['Episode_time_stamp'] = data['Title'].apply(extract_episode_time_stamp)
+    for i in range(len(txt)):
+        if txt[i] == ')':
+            for j in range(i+1, i+20):
+                data = data + txt[j]
+            return data
+
+data['Time_Period'] = data['Title'].apply(extraction_time)
+
 # print(data)
 
-# -------------------------------------------------------------------------------
-# Extracting a total months from the time stamp
+# --------------------------------------------------------------------------------------------
+# Extract the months from the Time Column
 
-def total_months_count(x):
-    match = re.match(r'(\w+ \d+) - (\w+ \d+)', x)
-    # print(match)
-    if not match:
-        raise ValueError(f"Input string format not valid: {x}")
-    start_date, end_date = match.groups()
-    start_date = pd.to_datetime(start_date, format='%b %Y')
-    end_date = pd.to_datetime(end_date, format='%b %Y')
-    rd = relativedelta(end_date, start_date)
-    total_months = rd.years * 12 + rd.months + 1 # +1 to include the starting month
-    return total_months
-    
-data ['Total_months'] = data['Episode_time_stamp'].apply(total_months_count)
+def extract_months(txt):
+    try:
+        start_str, end_str = txt.split(' - ')
+        start_str = datetime.strptime(start_str, '%b %Y')
+        end_str = datetime.strptime(end_str, '%b %Y')
+        # print(start_str, end_str)
+        r = relativedelta(end_str, start_str)
+        return r.years * 12 + r.months + 1
+    except:
+        return None            
+
+data['Months'] = data['Time_Period'].apply(extract_months)
 # print(data)
 
-# print(total_months_count('Jan 2020 - Dec 2021'))
+# --------------------------------------------------------------------------------------------
+# which anime has the highest score
+# print(data[data['Score'] == data['Score'].max()]['Title'])
 
-# ---------------------------------------------------------------------------------
-# Which anime has the highest score
+# --------------------------------------------------------------------------------------------
+# Print Top 5 anime with highest score
+top_5 = data.sort_values(by='Score', ascending=False).head(5)
+# print(top_5[['Title', 'Score']]) 
 
-high_score_anime = data[data['Score'] == data['Score'].max()]['Title']
-# print(str(high_score_anime))
+# --------------------------------------------------------------------------------------------
+# Which anime has the highest number of episodes
+# print(data[data['Episode'] == data['Episode'].max()]['Title'])
 
-# ---------------------------------------------------------------------------------
-# Top five anime
-# print(data['Title'].head(5)) # because our data is sorted
+# --------------------------------------------------------------------------------------------
+# Print Top 5 anime with highest number of episodes
+Top_5_episodes = data.sort_values(by='Episode', ascending=False).head(5)
+# print(Top_5_episodes[['Title', 'Episode']])
 
-# ---------------------------------------------------------------------------------
-# which anime has the highest episode count
-highest_episode = data[data['Episode_count'] == data['Episode_count'].max()]
-# print(highest_episode)
+# --------------------------------------------------------------------------------------------
+# Which is the longest running anime
+print(data[data['Months'] == data['Months'].max()]['Title'])
 
-# ---------------------------------------------------------------------------------
-# anime with top 5 episode count
-# first sort the data 
-data_sec = data.sort_values(by='Episode_count', ascending=False)
-# print(data_sec)
-# print(data_sec['Title'].head(5))
 
-# ---------------------------------------------------------------------------------
-# which is the longest running anime
-print(data[data['Total_months'] == data['Total_months'].max()])
-    
 
